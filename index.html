@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Enterprise | Intelligent Fleet Solutions</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-dark text-light">
+
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="main-nav">
+        <div class="container">
+            <a class="navbar-brand fw-bold fs-3 tracking-wide" href="#"> <span class="fw-light text-accent">ENTERPRISE</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="#fleet-matrix">Matrix Allocation</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#interactive-specs">Telemetry</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#compare">Compare</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#leasing">Finance</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#external-resources">Live Data</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero-section d-flex align-items-center text-start">
+        <div class="container reveal-up">
+            <div class="row">
+                <div class="col-lg-8">
+                    <h1 class="display-1 fw-bold mb-3 tracking-tight">Precision mobility.<br>Engineered for leaders.</h1>
+                    <p class="lead text-secondary mb-5 fs-4 w-75">Deploy intelligent automotive assets tailored strictly to your executive requirements and corporate terrain.</p>
+                    <a href="#fleet-matrix" class="btn btn-accent rounded-pill px-5 py-3 fs-5 fw-bold shadow-lg">Access Fleet Matrix <i class="fas fa-arrow-down ms-2"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="fleet-matrix" class="py-5 min-vh-100 d-flex align-items-center bg-black border-bottom border-dark">
+        <div class="container py-5">
+            <div class="text-center mb-5 reveal-up">
+                <h2 class="display-4 fw-bold">Smart Fleet Matrix</h2>
+                <p class="text-secondary fs-5">Select operational constraints to generate a mathematically optimized allocation from our full inventory.</p>
+            </div>
+
+            <div class="row justify-content-center reveal-up delay-1">
+                <div class="col-lg-10">
+                    <div class="glass-panel p-5 rounded-4 shadow-lg">
+                        <div class="row text-center mb-4">
+                            <div class="col-md-6 mb-4">
+                                <h5 class="mb-3 text-uppercase tracking-wide text-secondary fs-6">1. Form Factor</h5>
+                                <div class="btn-group-vertical w-100" role="group" id="form-selector">
+                                    <button type="button" class="btn btn-outline-light matrix-btn" data-value="suv">Commanding SUV</button>
+                                    <button type="button" class="btn btn-outline-light matrix-btn" data-value="sedan">Executive Sedan</button>
+                                    <button type="button" class="btn btn-outline-light matrix-btn" data-value="hatchback">Urban Hatchback / Crossover</button>
+                                    <button type="button" class="btn btn-outline-light matrix-btn" data-value="mpv">Utility MPV</button>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <h5 class="mb-3 text-uppercase tracking-wide text-secondary fs-6">2. Operational Focus</h5>
+                                <div class="btn-group-vertical w-100" role="group" id="focus-selector">
+                                    <button type="button" class="btn btn-outline-light matrix-btn" data-value="city">Dense Urban Routing</button>
+                                    <button type="button" class="btn btn-outline-light matrix-btn" data-value="highway">Intercity Highway Transit</button>
+                                    <button type="button" class="btn btn-outline-light matrix-btn" data-value="eco">Eco / Hybrid Efficiency</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center mt-3">
+                            <button id="run-matrix-btn" class="btn btn-light btn-lg px-5 py-3 rounded-pill fw-bold disabled">Process Allocation</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="allocation-result" class="mt-5" style="display: none;">
+                <div class="row align-items-center glass-panel rounded-4 p-4 border border-accent">
+                    <div class="col-lg-7 text-center">
+                        <img id="alloc-img" src="" alt="Allocated Vehicle" class="img-fluid rounded-3 shadow-lg" style="max-height: 400px; object-fit: cover;">
+                    </div>
+                    <div class="col-lg-5 p-4">
+                        <span class="badge bg-accent text-dark mb-3 px-3 py-2 rounded-pill fw-bold">Optimized Match</span>
+                        <h3 id="alloc-title" class="display-5 fw-bold mb-3"></h3>
+                        <p id="alloc-desc" class="lead text-secondary mb-4"></p>
+                        <a href="#interactive-specs" class="btn btn-outline-light rounded-pill px-4 py-2" onclick="setTimeout(() => { updateSpecs(window.allocatedCarId); }, 500);">View Telemetry</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="interactive-specs" class="py-5 bg-dark min-vh-100 d-flex align-items-center">
+        <div class="container py-5">
+            <h2 class="display-4 fw-bold mb-5 text-center reveal-up">Complete Fleet Telemetry</h2>
+            
+            <div class="row reveal-up delay-1">
+                <div class="col-lg-4 mb-4">
+                    <div class="glass-panel rounded-4 shadow-lg p-2" style="height: 600px; overflow-y: auto;">
+                        <div class="list-group list-group-flush" id="spec-list"></div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-8">
+                    <div class="glass-panel p-5 rounded-4 h-100">
+                        <div class="row align-items-center mb-4">
+                            <div class="col-md-8">
+                                <h3 id="spec-title" class="display-5 fw-bold m-0"></h3>
+                                <p id="spec-subtitle" class="text-secondary m-0 mt-2 fs-5"></p>
+                            </div>
+                            <div class="col-md-4 text-end">
+                                <h4 id="spec-price" class="fw-light text-accent m-0"></h4>
+                            </div>
+                        </div>
+
+                        <div class="row g-4 mt-3" id="spec-grid">
+                            <div class="col-6 col-md-3">
+                                <div class="p-3 border border-secondary rounded-3 text-center bg-black">
+                                    <h6 class="text-secondary text-uppercase fs-7 mb-1">Engine</h6>
+                                    <p class="fw-bold fs-5 m-0" id="data-engine">--</p>
+                                </div>
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <div class="p-3 border border-secondary rounded-3 text-center bg-black">
+                                    <h6 class="text-secondary text-uppercase fs-7 mb-1">Power</h6>
+                                    <p class="fw-bold fs-5 m-0" id="data-power">--</p>
+                                </div>
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <div class="p-3 border border-secondary rounded-3 text-center bg-black">
+                                    <h6 class="text-secondary text-uppercase fs-7 mb-1">Torque</h6>
+                                    <p class="fw-bold fs-5 m-0" id="data-torque">--</p>
+                                </div>
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <div class="p-3 border border-secondary rounded-3 text-center bg-black">
+                                    <h6 class="text-secondary text-uppercase fs-7 mb-1">Trans</h6>
+                                    <p class="fw-bold fs-5 m-0" id="data-trans">--</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4 text-center">
+                             <img id="spec-image" src="" alt="Vehicle" class="img-fluid rounded-3 shadow-lg border border-secondary" style="height: 350px; width: 100%; object-fit: cover;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="compare" class="py-5 bg-black border-top border-secondary">
+        <div class="container py-5 reveal-up">
+            <h2 class="display-4 fw-bold mb-5 text-center">Direct Asset Comparison</h2>
+            
+            <div class="row mb-4">
+                <div class="col-md-5">
+                    <select class="form-select form-select-lg bg-dark text-light border-accent" id="compare-1"></select>
+                </div>
+                <div class="col-md-2 text-center d-flex align-items-center justify-content-center">
+                    <span class="badge bg-secondary p-3 rounded-circle">VS</span>
+                </div>
+                <div class="col-md-5">
+                    <select class="form-select form-select-lg bg-dark text-light border-accent" id="compare-2"></select>
+                </div>
+            </div>
+
+            <div class="glass-panel rounded-4 overflow-hidden">
+                <table class="table table-dark table-hover mb-0 text-center align-middle">
+                    <thead class="bg-black">
+                        <tr>
+                            <th id="comp-img-1" class="w-50 p-4"><img src="" class="img-fluid rounded" style="max-height: 200px; object-fit: cover;"></th>
+                            <th id="comp-img-2" class="w-50 p-4 border-start border-secondary"><img src="" class="img-fluid rounded" style="max-height: 200px; object-fit: cover;"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td id="comp-price-1" class="p-3 fw-bold text-accent fs-5"></td>
+                            <td id="comp-price-2" class="p-3 fw-bold text-accent border-start border-secondary fs-5"></td>
+                        </tr>
+                        <tr>
+                            <td id="comp-engine-1" class="p-3"></td>
+                            <td id="comp-engine-2" class="p-3 border-start border-secondary"></td>
+                        </tr>
+                        <tr>
+                            <td id="comp-power-1" class="p-3"></td>
+                            <td id="comp-power-2" class="p-3 border-start border-secondary"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section id="leasing" class="py-5 bg-dark border-top border-secondary">
+        <div class="container py-5 reveal-up">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="display-5 fw-bold mb-4">Corporate Financial Calculator</h2>
+                    <p class="text-secondary mb-5">Estimate your monthly executive fleet expenditures instantly based on estimated ex-showroom values.</p>
+                    
+                    <div class="glass-panel p-5 rounded-4 text-start shadow-lg">
+                        <form id="lease-form">
+                            <div class="mb-4">
+                                <label class="form-label text-secondary">Asset Base Value (₹)</label>
+                                <input type="number" class="form-control form-control-lg bg-transparent text-light border-secondary" id="lease-value" value="1500000" min="500000">
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <label class="form-label text-secondary">Capital Down (%)</label>
+                                    <input type="range" class="form-range" id="lease-down" min="0" max="50" step="5" value="20">
+                                    <div class="text-end text-accent fw-bold fs-5" id="down-val-display">20%</div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <label class="form-label text-secondary">Tenure (Years)</label>
+                                    <select class="form-select form-select-lg bg-transparent text-light border-secondary" id="lease-tenure">
+                                        <option value="3" class="text-dark">36 Months (3 Yrs)</option>
+                                        <option value="5" class="text-dark" selected>60 Months (5 Yrs)</option>
+                                        <option value="7" class="text-dark">84 Months (7 Yrs)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                        
+                        <div class="mt-4 p-4 border border-accent rounded-3 text-center bg-black">
+                            <h5 class="text-secondary mb-2">Estimated Monthly Amortization</h5>
+                            <h2 class="display-3 fw-bold text-accent mb-0" id="lease-result">₹ 0</h2>
+                            <p class="text-muted small mt-2">*Calculated at standard 8.5% B2B corporate interest rate.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="external-resources" class="py-5 bg-black border-top border-dark">
+        <div class="container py-5 reveal-up text-center">
+            <h2 class="display-5 fw-bold mb-4">Real-Time Market Data & Analytics</h2>
+            <p class="text-secondary fs-5 mb-5 w-75 mx-auto">For granular, real-time on-road pricing, comprehensive expert reviews, and live market fluctuations,  Enterprise links directly to industry-leading databases.</p>
+            
+            <div class="glass-panel p-5 rounded-4 d-inline-block border-accent shadow-lg">
+                <i class="fas fa-chart-line text-accent display-4 mb-3"></i>
+                <h3 class="mb-3">Partner Resource: 91Wheels</h3>
+                <p class="text-secondary mb-4">Access detailed buyer metrics, EMI calculators, and exact on-road pricing for vehicles like the Kia Seltos and more.</p>
+                <a href="https://www.91wheels.com/cars/kia/seltos?utm_source=google&utm_medium=cpc&utm_campaign=Ser-Model-Car-Kia-Seltos-NCD-Gujarat-Ai-Max&matchtype=b&device=c&campaignid=23553872099&loc_physical_ms=9061750&network=g&keyword=kia%20seltos%20htk%20o%20diesel%20on%20road%20price&placement=&loc_interest_ms=&gad_source=1&gad_campaignid=23553872099&gbraid=0AAAAApylJUuW0DzR1Xuwv8C7X5Nl4iU3K&gclid=Cj0KCQiAhtvMBhDBARIsAL26pjE2FyX2I_CLLtbIk0sZgsN_zi3-bW23sYWeEtAkx0w55CflaRS0ZVQaAg3kEALw_wcB" target="_blank" class="btn btn-accent btn-lg rounded-pill px-5 fw-bold">View Live Data on 91Wheels <i class="fas fa-external-link-alt ms-2"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-5 text-center text-secondary bg-dark border-top border-secondary">
+        <div class="container">
+            <h3 class="text-light tracking-wide mb-3"> <span class="text-accent">ENTERPRISE</span></h3>
+            <p>&copy; 2026  Enterprise Fleet Solutions.</p>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
